@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Дневник Бини</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: url('https://i.imgur.com/O1qKJtZ.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #3c2f2f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .page {
+      background-color: rgba(255, 250, 240, 0.95);
+      padding: 40px;
+      max-width: 700px;
+      margin: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    .hidden { display: none; }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background: #6d4c41;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #5d3c31;
+    }
+    .choices button {
+      display: block;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page" id="page1">
+    <h2>Глава 1 — Биня</h2>
+    <p>День первый.<br>
+    Она написала мне первой.<br>
+    Началось то, что я никогда не забуду.<br>
+    Девушка, которая изменит мою историю.<br>
+    Я не знал, что такое любовь, пока не встретил её.</p>
+    <button onclick="nextPage(2)">Далее</button>
+  </div>
+
+  <div class="page hidden" id="page2">
+    <p>Она была как свет. <br>
+    И я не сразу понял, насколько он тёплый.</p>
+    <button onclick="nextPage(3)">Далее</button>
+  </div>
+
+  <div class="page hidden" id="page3">
+    <h3>Где была сделана первая фотография Бини для меня?</h3>
+    <div class="choices">
+      <button onclick="wrongAnswer(this)">На кухне</button>
+      <button onclick="rightAnswer(4)">На фоне Парижа</button>
+      <button onclick="wrongAnswer(this)">Сидя за компьютером</button>
+    </div>
+  </div>
+
+  <div class="page hidden" id="page4">
+    <h3>Глава 4 — Моя самая первая шутка про тебя</h3>
+    <p>Какая была моя первая шутка про тебя?</p>
+    <div class="choices">
+      <button onclick="rightAnswer(5)">В Семее запретили</button>
+      <button onclick="wrongAnswer(this)">Поставь 4:3</button>
+      <button onclick="wrongAnswer(this)">Что будешь делать вечером? — Разговариваю с тобой!</button>
+    </div>
+  </div>
+
+  <div class="page hidden" id="page5">
+    <p>Вот! Вот это моя девочка. Даже такие дикие шутки ты помнишь — и в этом ты вся.</p>
+    <button onclick="nextPage(6)">Далее</button>
+  </div>
+
+  <div class="page hidden" id="page6">
+    <h3>Секретное письмо</h3>
+    <p>Иногда мне кажется, что я тебя выдумал.<br>
+    Но ты настоящая. И я в восторге от этой реальности.<br>
+    Ты — моя история.</p>
+    <button onclick="nextPage(7)">К финалу</button>
+  </div>
+
+  <div class="page hidden" id="page7">
+    <h2>Финал</h2>
+    <p>Ты — моя всегда.<br>
+    Ты часть этого мира, которого я раньше не знал.<br>
+    Ты моё навсегда, Биня.</p>
+    <audio controls autoplay loop>
+      <source src="https://dl.sndup.net/2t4r/Seroga%20Pirat%20-%20ChSV.mp3" type="audio/mpeg">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+  </div>
+
+  <script>
+    function nextPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      document.getElementById(`page${n}`).classList.remove('hidden');
+    }
+
+    function rightAnswer(next) {
+      nextPage(next);
+    }
+
+    function wrongAnswer(el) {
+      alert("Ты дурашка? Я думал, я достаточно дразнил тебя, чтоб запомнить!");
+    }
+  </script>
+</body>
+</html>
