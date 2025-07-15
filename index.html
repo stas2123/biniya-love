@@ -2,46 +2,70 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Дневник Бини</title>
+  <title>Книга о Бине</title>
   <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: 'Georgia', serif;
-      background: url('https://i.imgur.com/O1qKJtZ.jpg') no-repeat center center fixed;
+      background: url('https://i.imgur.com/jEcNWK9.jpeg') no-repeat center center fixed;
       background-size: cover;
-      color: #3c2f2f;
+      color: #2f1d14;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
     }
+
     .page {
-      background-color: rgba(255, 250, 240, 0.95);
+      background-color: rgba(255, 245, 230, 0.95);
       padding: 40px;
       max-width: 700px;
       margin: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      animation: fadeIn 0.6s ease;
     }
+
     .hidden { display: none; }
     button {
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 18px;
-      background: #6d4c41;
+      background: #6a4e42;
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
     }
+
     button:hover {
-      background: #5d3c31;
+      background: #5a3d33;
     }
+
     .choices button {
       display: block;
       margin: 10px 0;
+    }
+
+    .secret {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #a79c7c;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -52,33 +76,33 @@
     <p>День первый.<br>
     Она написала мне первой.<br>
     Началось то, что я никогда не забуду.<br>
-    Девушка, которая изменит мою историю.<br>
+    Девушка, которая изменила мою историю.<br>
     Я не знал, что такое любовь, пока не встретил её.</p>
+    <img src="https://i.imgur.com/bZi8f34.jpg" alt="Фото Бини">
     <button onclick="nextPage(2)">Далее</button>
   </div>
 
   <div class="page hidden" id="page2">
-    <p>Она была как свет. <br>
-    И я не сразу понял, насколько он тёплый.</p>
+    <p>Она была как свет. <br> И я не сразу понял, насколько он тёплый.</p>
     <button onclick="nextPage(3)">Далее</button>
   </div>
 
   <div class="page hidden" id="page3">
     <h3>Где была сделана первая фотография Бини для меня?</h3>
     <div class="choices">
-      <button onclick="wrongAnswer(this)">На кухне</button>
+      <button onclick="wrongAnswer()">На кухне</button>
       <button onclick="rightAnswer(4)">На фоне Парижа</button>
-      <button onclick="wrongAnswer(this)">Сидя за компьютером</button>
+      <button onclick="wrongAnswer()">Сидя за компьютером</button>
     </div>
   </div>
 
   <div class="page hidden" id="page4">
-    <h3>Глава 4 — Моя самая первая шутка про тебя</h3>
+    <h3>Глава 4 — Первая шутка</h3>
     <p>Какая была моя первая шутка про тебя?</p>
     <div class="choices">
       <button onclick="rightAnswer(5)">В Семее запретили</button>
-      <button onclick="wrongAnswer(this)">Поставь 4:3</button>
-      <button onclick="wrongAnswer(this)">Что будешь делать вечером? — Разговариваю с тобой!</button>
+      <button onclick="wrongAnswer()">Поставь 4:3</button>
+      <button onclick="wrongAnswer()">Что будешь делать вечером?</button>
     </div>
   </div>
 
@@ -89,21 +113,24 @@
 
   <div class="page hidden" id="page6">
     <h3>Секретное письмо</h3>
-    <p>Иногда мне кажется, что я тебя выдумал.<br>
-    Но ты настоящая. И я в восторге от этой реальности.<br>
-    Ты — моя история.</p>
+    <p>Иногда мне кажется, что я тебя выдумал.<br> Но ты настоящая. И я в восторге от этой реальности.<br> Ты — моя история.</p>
+    <div class="secret" onclick="showSecret()">[ нажми сюда, если веришь в чудо ]</div>
     <button onclick="nextPage(7)">К финалу</button>
   </div>
 
   <div class="page hidden" id="page7">
     <h2>Финал</h2>
-    <p>Ты — моя всегда.<br>
-    Ты часть этого мира, которого я раньше не знал.<br>
-    Ты моё навсегда, Биня.</p>
+    <p>Ты — моя всегда.<br>Ты часть этого мира, которого я раньше не знал.<br>Ты моё навсегда, Биня.</p>
     <audio controls autoplay loop>
-      <source src="https://dl.sndup.net/2t4r/Seroga%20Pirat%20-%20ChSV.mp3" type="audio/mpeg">
+      <source src="https://cdn.pixabay.com/audio/2023/03/01/audio_3b5ad31649.mp3" type="audio/mpeg">
       Ваш браузер не поддерживает аудио.
     </audio>
+  </div>
+
+  <div class="page hidden" id="secretPage">
+    <h2>Секретная глава</h2>
+    <p>Ты нашла это место — значит, ты особенная.<br> Здесь я оставил чувства, которые словами не выразить.<br> Спасибо, что ты есть. Ты — чудо.</p>
+    <button onclick="nextPage(7)">Назад</button>
   </div>
 
   <script>
@@ -112,12 +139,27 @@
       document.getElementById(`page${n}`).classList.remove('hidden');
     }
 
-    function rightAnswer(next) {
-      nextPage(next);
+    let wrongCount = 0;
+    function wrongAnswer() {
+      wrongCount++;
+      const messages = [
+        "Ты дурашка? Я же дразнил тебя этим!",
+        "Опять мимо! Ты точно меня слушаешь?",
+        "Трижды нет! Но я всё равно люблю тебя.",
+        "Ты меня троллишь? 😂",
+        "Ладно... я сдаюсь. Но ты попробуй вспомнить ❤️"
+      ];
+      alert(messages[Math.min(wrongCount - 1, messages.length - 1)]);
     }
 
-    function wrongAnswer(el) {
-      alert("Ты дурашка? Я думал, я достаточно дразнил тебя, чтоб запомнить!");
+    function rightAnswer(next) {
+      nextPage(next);
+      wrongCount = 0;
+    }
+
+    function showSecret() {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      document.getElementById("secretPage").classList.remove('hidden');
     }
   </script>
 </body>
